@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ENFJ 性格类型介绍</title>
+    <title>ENFJ 性格类型介绍与测试</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -13,16 +13,61 @@
         h1, h2, h3, h4, h5, h6 {
             color: #2c3e50;
         }
+        p {
+            color: #34495e;
+        }
         mark {
             background-color: yellow;
+        }
+        strong {
+            color: #e74c3c;
+        }
+        em {
+            color: #3498db;
+        }
+        b {
+            color: #27ae60;
         }
         dl {
             background-color: #f9f9f9;
             padding: 10px;
             border-left: 5px solid #3498db;
+            color: #7f8c8d;
         }
-        ul, ol {
-            margin: 10px 0;
+        ul {
+            color: #9b59b6;
+        }
+        ol {
+            color: #8e44ad;
+        }
+        .question {
+            margin: 20px 0;
+            padding: 15px;
+            border: 1px solid #dcdcdc;
+            background-color: #ecf0f1;
+        }
+        .question h3 {
+            color: #34495e;
+        }
+        .result {
+            margin-top: 20px;
+            padding: 15px;
+            border: 2px solid #3498db;
+            background-color: #dff9fb;
+            color: #2d3436;
+            display: none;
+        }
+        button {
+            margin: 5px;
+            padding: 10px 15px;
+            background-color: #3498db;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #2980b9;
         }
     </style>
 </head>
@@ -67,5 +112,57 @@
 
     <!-- 使用 ruby 注释 -->
     <p>日语中的 ENFJ 发音：<ruby>エンエフジェイ<rt>ENFJ</rt></ruby></p>
+
+    <!-- 测试题目 -->
+    <div class="question">
+        <h3>1. 你更喜欢：</h3>
+        <button onclick="selectOption('E')">与人交往（E）</button>
+        <button onclick="selectOption('I')">独处安静（I）</button>
+    </div>
+    <div class="question">
+        <h3>2. 你更关注：</h3>
+        <button onclick="selectOption('N')">未来可能（N）</button>
+        <button onclick="selectOption('S')">现实细节（S）</button>
+    </div>
+    <div class="question">
+        <h3>3. 做决定时你更倾向于：</h3>
+        <button onclick="selectOption('F')">关注情感（F）</button>
+        <button onclick="selectOption('T')">关注逻辑（T）</button>
+    </div>
+    <div class="question">
+        <h3>4. 你的生活方式更偏向：</h3>
+        <button onclick="selectOption('J')">计划有序（J）</button>
+        <button onclick="selectOption('P')">灵活开放（P）</button>
+    </div>
+
+    <!-- 测试结果 -->
+    <div id="result" class="result">
+        <h3>你的 MBTI 测试结果是：</h3>
+        <p id="mbtiResult">等待你的选择...</p>
+    </div>
+
+    <script>
+        // 初始化选项计分
+        let scores = { E: 0, I: 0, N: 0, S: 0, F: 0, T: 0, J: 0, P: 0 };
+
+        // 记录用户选择
+        function selectOption(option) {
+            scores[option]++;
+            checkCompletion();
+        }
+
+        // 检查是否完成所有选择
+        function checkCompletion() {
+            if (Object.values(scores).reduce((a, b) => a + b, 0) === 4) {
+                const result = 
+                    (scores.E > scores.I ? "E" : "I") +
+                    (scores.N > scores.S ? "N" : "S") +
+                    (scores.F > scores.T ? "F" : "T") +
+                    (scores.J > scores.P ? "J" : "P");
+                document.getElementById("mbtiResult").innerText = result;
+                document.getElementById("result").style.display = "block";
+            }
+        }
+    </script>
 </body>
 </html>
