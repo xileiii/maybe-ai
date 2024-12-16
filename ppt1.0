@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>大学毕业主题网页</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: lightgreen;
+      overflow: hidden;
+    }
+
+   .page {
+      width: 100%;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 36px;
+      color: white;
+      text-align: center;
+    }
+
+   .page1 {
+      background-color: green;
+    }
+
+   .page2 {
+      background-color: darkgreen;
+    }
+
+   .page3 {
+      background-color: forestgreen;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="page page1">页面一：大学回忆</div>
+  <div class="page page2">页面二：毕业感言</div>
+  <div class="page page3">页面三：未来展望</div>
+
+  <script>
+    let currentPage = 0;
+    const pages = document.querySelectorAll('.page');
+
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'ArrowRight') {
+        currentPage++;
+        if (currentPage >= pages.length) {
+          currentPage = 0;
+        }
+        updatePage();
+      } else if (event.key === 'ArrowLeft') {
+        currentPage--;
+        if (currentPage < 0) {
+          currentPage = pages.length - 1;
+        }
+        updatePage();
+      }
+    });
+
+    function updatePage() {
+      pages.forEach((page, index) => {
+        if (index === currentPage) {
+          page.style.display = 'flex';
+        } else {
+          page.style.display = 'none';
+        }
+      });
+    }
+  </script>
+</body>
+
+</html>
