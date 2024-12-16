@@ -4,21 +4,17 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>大学毕业主题网页</title>
+  <title>季节页面</title>
   <style>
     body {
       margin: 0;
       padding: 0;
-      background-color: lightgreen;
       overflow: hidden;
-      perspective: 1000px;
     }
 
    .page-container {
-      position: relative;
-      width: 100%;
       height: 100vh;
-      transform-style: preserve-3d;
+      position: relative;
     }
 
    .page {
@@ -27,8 +23,6 @@
       position: absolute;
       top: 0;
       left: 0;
-      backface-visibility: hidden;
-      transition: transform 0.5s ease-in-out;
       display: flex;
       justify-content: center;
       align-items: center;
@@ -36,27 +30,28 @@
       color: white;
       text-align: center;
       opacity: 0;
+      transition: opacity 0.5s ease;
     }
 
    .page1 {
-      background-color: green;
+      background-color: #aaffaa;
     }
 
    .page2 {
-      background-color: darkgreen;
+      background-color: #77ff77;
     }
 
    .page3 {
-      background-color: forestgreen;
+      background-color: #44ff44;
     }
   </style>
 </head>
 
 <body>
   <div class="page-container">
-    <div class="page page1">页面一：大学回忆</div>
-    <div class="page page2">页面二：毕业感言</div>
-    <div class="page page3">页面三：未来展望</div>
+    <div class="page page1">初夏</div>
+    <div class="page page2">盛夏</div>
+    <div class="page page3">仲夏</div>
   </div>
 
   <script>
@@ -88,7 +83,7 @@
     });
 
     function updatePage() {
-      pageContainer.style.transform = `rotateY(${currentPage * -120}deg)`;
+      pageContainer.style.transform = `translateY(-${currentPage * 100}vh)`;
     }
   </script>
 </body>
