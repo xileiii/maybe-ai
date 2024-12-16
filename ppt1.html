@@ -11,21 +11,31 @@
       padding: 0;
       background-color: lightgreen;
       overflow: hidden;
+      perspective: 1000px;
+    }
+
+   .page-container {
+      position: relative;
+      width: 100%;
+      height: 100vh;
+      transform-style: preserve-3d;
     }
 
    .page {
       width: 100%;
       height: 100vh;
+      position: absolute;
+      top: 0;
+      left: 0;
+      backface-visibility: hidden;
+      transition: transform 0.5s ease-in-out;
       display: flex;
       justify-content: center;
       align-items: center;
       font-size: 36px;
       color: white;
       text-align: center;
-      position: absolute;
-      top: 0;
-      left: 0;
-      transition: transform 0.5s ease-in-out;
+      opacity: 0;
     }
 
    .page1 {
@@ -43,40 +53,42 @@
 </head>
 
 <body>
-  <div class="page page1">页面一：大学回忆</div>
-  <div class="page page2">页面二：毕业感言</div>
-  <div class="page page3">页面三：未来展望</div>
+  <div class="page-container">
+    <div class="page page1">页面一：大学回忆</div>
+    <div class="page page2">页面二：毕业感言</div>
+    <div class="page page3">页面三：未来展望</div>
+  </div>
 
   <script>
     let currentPage = 0;
     const pages = document.querySelectorAll('.page');
+    const pageContainer = document.querySelector('.page-container');
 
-    document.addEventListener('keydown', (event) => {
-      if (event.key === 'ArrowRight') {
+    // 处理滚动事件
+    document.addEventListener('wheel', (event) => {
+      if (event.deltaY > 0) {
         currentPage++;
         if (currentPage >= pages.length) {
           currentPage = 0;
         }
-        updatePage();
-      } else if (event.key === 'ArrowLeft') {
+      } else {
         currentPage--;
         if (currentPage < 0) {
           currentPage = pages.length - 1;
         }
-        updatePage();
       }
+      updatePage();
+    });
+
+    // 处理点击事件，显示文字
+    pages.forEach(page => {
+      page.addEventListener('click', () => {
+        page.style.opacity = 1;
+      });
     });
 
     function updatePage() {
-      pages.forEach((page, index) => {
-        if (index === currentPage) {
-          page.style.transform = 'translateX(0)';
-          page.style.display = 'flex';
-        } else {
-          page.style.transform = 'translateX(100vw)';
-          page.style.display = 'none';
-        }
-      });
+      pageContainer.style.transform = `rotateY(${currentPage * -120}deg)`;
     }
   </script>
 </body>
